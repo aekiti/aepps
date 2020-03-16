@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeTwaet - Aeternity has it happens</title>
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <!-- Logo -->
+            <article class="logo__container">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="paper-plane" class="svg-inline--fa fa-paper-plane fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="2em">
+                    <path fill="currentColor" d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"></path>
+                </svg>
+            </article>
+            <!-- Header Title -->
+            <h1>AeTwaet</h1>
+        </header>
+        <!-- Twaets Container -->
+        <section class="twaets__container"></section>
+
+        <!-- New Twaets Form -->
+        <section class="twaets__entry modal">
+            <form method="post" id="twaet-form">
+                <div class="form__header">
+                    <h2>Add New Twaet</h2>
+                    <button type="button" id="close-form">&#10005</button>
+                </div>
+                <label for="name">Username</label>
+                <input type="text" name="name" id="name" required placeholder="yinka01" size="20" maxlength="20">
+
+                <label for="avatar">Avatar</label>
+                <input type="url" name="avatar" id="avatar" required placeholder="https://directory/my_avatar.jpeg">
+
+                <label for="twaet">Twaet</label>
+                <textarea name="twaet" id="twaet" cols="30" rows="10"  required placeholder="Aeternity is awesome" size="160" maxlength="160"></textarea>
+
+                <button type="submit" class="btn">Twaet</button>
+            </form>
+        </section>
+
+        <!-- Spinner Modal -->
+        <section class="spinner__modal modal">
+            <div class="spinner"></div>
+            <h4 class="spinner__text">Loading...</h4>
+        </section>
+
+        <!-- Float Button -->
+        <button class="float__btn">+</button>
+    </main>
+
+    <script src="https://unpkg.com/@aeternity/aepp-sdk@6.1.2/dist/aepp-sdk.browser-script.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
