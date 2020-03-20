@@ -1,0 +1,48 @@
+contract RideArt =
+   
+  record ride =
+    { customersAddress : address,
+      name             : string,
+      email            : string, 
+      mobile           : string,
+      location         : string,
+      destination      : string,
+      rideid           : string }
+      
+  record state =
+    { rides        : map(string, ride),
+      userRides    : map(address, list(ride)),
+      admin        : address }
+      
+  entrypoint init() =
+    { rides = {},
+      userRides = {},
+      admin =ak_2YBb3u6Wjs8Gbb5pdDegYMUWhG1mneUK4yjL6ygjLh8hvZk83x }
+
+  function requirement(exp : bool, err : string) =
+    if(!exp)
+     abort(err)
+
+  entrypoint onlyAdmin() : bool =
+    requirement(state.admin ==Call.caller, "You are not admin to access this page")
+    true
+
+  stateful entrypoint newRide(name' : string, email' : string, mobile' : string, location' : string, destination': string, rideid': string)=                                           
+    let ride = { customersAddress = Call.caller, name = name', email = email', mobile = mobile', location = location', destination = destination', rideid = rideid'}
+
+    let userRideList=Map.lookup_default(Call.caller,state.userRides,[])
+    let newUserRideList=ride::userRideList
+
+    put(state{ rides[rideid'] = ride, userRides[Call.caller] = newUserRideList })
+
+  entrypoint getUserRides()=
+   Map.lookup_default(Call.caller, state.userRides,[])
+
+  entrypoint getRide(rideid : string) : ride =
+    switch(Map.lookup(rideid, state.rides))
+      None    => abort("There was no ride registered with this id.")
+      Some(x) => x
+
+  entrypoint getRides()=
+   onlyAdmin()
+   state.rides
