@@ -1,0 +1,7 @@
+ contract BlogPayment=
+        record state={myAddress:address}
+        
+        entrypoint init()={myAddress=ak_2bKhoFWgQ9os4x8CaeDTHZRGzUcSwcXYUrM12gZHKTdyreGRgG}
+            
+        public stateful entrypoint makePayment()=
+            Chain.spend(state.myAddress,Call.value)

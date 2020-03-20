@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>Sign In</title>
+        
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                        
+                 <link rel="stylesheet" href="./me.css">
+                    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+                    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+                    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js"></script>
+                    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-storage.js"></script>
+                   
+                    <script src="js/index.js"></script>
+                </head>
+
+
+    <body>
+            <div class="nimipersonal">
+              <nav class="navbar navbar-expand-lg bg-dark text-white">
+       <div class="container-fluid ">
+           <ul class="nav navbar-nav">
+               <li class="active">
+                   <a class="navbar-brand" style="color: whitesmoke ; text-decoration-style: wavy;" href="#"
+                   
+                   >Blog App</a>
+               </li>
+<!--                <li >
+                    <a class="nav-link" style="color: whitesmoke ; text-decoration-style: wavy;" href="#"
+                    
+                    ><span style="color: white">Home</span></a>
+                </li>
+                <li >
+                        <a class="nav-link" style="color: whitesmoke ; text-decoration-style: wavy;" href="#"
+                        
+                        ><span style="color: white">My Blogs</span></a>
+                    </li> -->
+           </ul>
+
+
+           <div class="dropdown navbar-right">
+               <button 
+               id="option-id"
+               class="btn btn-light dropdown-toggle bg-dark text-white"
+               type="button"
+               data-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               >
+                Options
+               </button>
+
+               <div 
+               class="dropdown-menu"
+               aria-labelledby="option-id"
+               >
+                 <a class="dropdown-item" id="btn-logout" href="#">
+                Log Out
+                 </a>  
+               </div>
+           </div>
+       </div>     
+        </nav>
+
+        <div class="row h-100 bg-light">
+            <div class="col-lg-0 bg-secondary">
+            <ul class="nav flex-column"></ul>
+            </div>
+
+            <div class="col-lg-12">
+            <div class="container" id="container">
+            <!---------BLOG POST AREA-->
+
+
+
+            <div class="jumbotron bg-dark" style="margin-top: 15px">
+                <script>
+                    var counter=0;
+                    </script>
+                <div class="container text-center">
+                    <form id="main-form">
+                        <div class="form-group">
+                            <textarea type="text" rows="5" placeholder="Description..." class="form-control" id="main-desc"></textarea>
+                          
+                            <div class="invalid-feedback">
+                                   Please write some Description
+                                </div>
+      
+                        <div class="form-group">
+                            <input type="file" class="form-control" id="main-image"/>
+                            <div class="invalid-feedback">
+                                PLease choose a valid picture
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <img id="selected-image" width="250" height="150" src="#" />
+                
+                        </div>
+
+                        <div class="form-group">
+                            <div class="progress bg-secondary">
+                                <div class="progress bar bg-success" id="upload-progress" style="width :0% ">0%</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="save-blog" type="button" 
+                            style="width:150px; height:60px" class="btn btn-light bg-light text-dark">
+                            Post</button>
+                        </div>
+                    </form>
+                    <div id="result">
+                        
+                    </div>
+                </div>
+            </div>
+            <!----BLOG POST AREA ENDS HERE-->
+           
+            <!-----AFTER BLOG POST AREA-->
+                <hr >
+                <br><br><br>
+                <div class="text-center bg-light text-dark">
+                    <h3>All New Posts</h3>
+                </div>
+                <hr>
+                <br>
+
+                <div class="row container-fluid bg-3">
+                    <div class="col-sm-12" id="blogs">
+
+                    </div>
+                </div>
+            
+            </div>
+            <!------AFTER BLOG POST AREA ENDS HERE-->
+       
+             <!------VALIDATION AND POSTING OF BLOGS-->
+            <script>
+
+$('#btn-logout').click(function(){
+      console.log("btn logout clicked");
+    firebase.auth().signOut();
+  });
+
+
+            var validImageTypes=["image/gif","image/jpeg","image/png"];
+            $('#selected-image').hide();
+
+            function previewImage(image_blog){
+                console.log("enterred");
+                var reader=new FileReader();
+                reader.onload=function(e){
+                
+                    $('#selected-image').attr('src',e.target.result);
+                    console.log("target "+e.target.result);
+                    console.log("targettted");
+                    $('#selected-image').fadeIn();
+                    
+                }
+                reader.readAsDataURL(image_blog.files[0]);
+                // $('#selected-image').show();
+                  
+            
+            }
+            $('#main-image').change(function(){
+                console.log("main change");
+                    previewImage(this);
+                });
+
+                $('#save-blog').click(function(){
+                    $('#main-desc').removeClass("is-invalid");
+                    $('#main-image').removeClass("is-invalid");
+               
+                    var desc=$('#main-desc').val();
+                    var picture=$("#main-image").prop("files")[0];
+                    console.log(picture);
+               
+               if(!desc){
+                   console.log("null desc")
+                $('#main-desc').addClass('is-invalid');
+                return;
+               }
+               if(picture==null){
+                   console.log("null picture")
+                   $("#main-image").addClass('is-invalid');
+
+               }
+
+               if($.inArray(picture["type"],validImageTypes)<0){
+                $('#main-image').addClass('is-invalid'); 
+                return; 
+               }
+
+                //**************************UPLOAD AND SAVE TO FIREBASE STORAGE
+                var databaseRef=firebase.database().ref().child("Blogs");
+                    databaseRef.once("value").then(function(snapshot){
+                    var name=picture["name"];
+                    var dateStr=new Date().getTime();
+                    var fileCompleteName=name +"_"+dateStr;
+
+                    var storageRef=firebase.storage().ref().child("Blog Images");
+                    var blogStorageRef=storageRef.child(fileCompleteName);
+
+                    var uploadTask=blogStorageRef.put(picture);
+
+                    uploadTask.on(
+                        "state_changed",function progress(snapshot){
+                            var percentage=(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+                            $('#upload-progress').html(Math.round(percentage)+"%");
+                            $('#upload-progress').attr("style","width: "+percentage+"%");
+
+                            
+
+                        },
+                        function error(err){
+
+                        },
+                        function complete(){
+                            var user=firebase.auth().currentUser;
+                            var userName;
+                            firebase.database().ref("Users/"+user.uid).once('value').then(function(snapshot){
+                                  var fName=(snapshot.val()&&snapshot.val().firstName);
+                                  var sName=(snapshot.val()&&snapshot.val().secondName);
+                                  userName= fName+ " "+ sName;  
+                            });
+                        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
+                            var time=new Date();
+                            var options={
+                                weekday :"long",
+                                month: "long",
+                                day:"2-digit",
+                                year:"numeric"
+                            };
+                            var blogData={
+                                "image": downloadUrl,
+                                "name":fileCompleteName,
+                                "desc":desc,
+                                "counter":5000-counter,
+                                "uid":user.uid,
+                                "userName":userName,
+                                "time":time.toLocaleString('en-US',{hour:'numeric',minute:"numeric",hour12:true}),
+                                "date": time.toLocaleDateString('en-US',options),
+                                
+                            }
+
+                            var newPostRef=databaseRef.push();
+                            newPostRef.set(blogData,function(error){
+                                    if(error){
+                                        $('#result').attr("class","alert alert-danger");
+                                        $('#result').html(error.message);
+
+                                    }else{
+                                        $('#result').attr("class","alert alert-success");
+                                        $('#result').html("Blog Has Been Updated");
+
+                                        window.open("","_self");
+                                    }
+                                    resetForm();
+                            });
+                        });
+                        
+                        }
+                        )
+                    });
+                 //**************************UPLOAD AND SAVE TO FIREBASE STORAGE ENDS HERE
+       
+                });
+
+       function resetForm(){
+           $('#main-form')[0].reset();
+           $('#selected-image').fadeOut()
+           $('#upload-progress').html("Completed")
+           
+        }
+
+        //**********************RETRIEVE AND DISPLAY DATA FROM FIREBASE**************
+
+//         var firebaseConfig = {
+//     apiKey: "AIzaSyBCr2PIDz2dIrek-WEmvkYzq_MytQOORyo",
+//     authDomain: "nimifirebaseblogsite.firebaseapp.com",
+//     databaseURL: "https://nimifirebaseblogsite.firebaseio.com",
+//     projectId: "nimifirebaseblogsite",
+//     storageBucket: "nimifirebaseblogsite.appspot.com",
+//     messagingSenderId: "840727252414",
+//     appId: "1:840727252414:web:2c535e5e93069e05"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+        var dbBlogs=firebase.database().ref().child("Blogs").orderByChild("counter");
+        dbBlogs.on("value",function(blogs){
+        if(blogs.exists()){
+            var blogsHtml="";
+            blogs.forEach(function(singleBlog){
+                counter=counter+1;
+                blogsHtml+="<div class='jumbotron bg-light text-dark border border-dark'>";
+            
+                    blogsHtml+="<div> <img width='100%' height= '550' src= '" ;
+                    blogsHtml+=singleBlog.val().image;
+
+            blogsHtml+="' /></div> <br>"; 
+
+            blogsHtml+="<div class='row' style='width:100%'>" ;
+              blogsHtml+="<div class='col-sm-5'><p style='color-grey;'>"
+                +
+                "Published by: " +singleBlog.val().userName
+                
+                +
+                "</p></div>"
+             +"<div class='col-sm-3'><p style='color-grey;'>"
+                +
+                "Time: " +singleBlog.val().time
+                
+                +
+                "</p></div>"
+                blogsHtml+="<div class='col-sm-4'><p style='color-grey; margin-left:75px'>"
+                +
+                "Date: " +singleBlog.val().date
+                
+                +
+                "</p></div>";
+            blogsHtml+="</div> <br>";   
+            
+                   
+                    
+                    blogsHtml+="<div style='text-align: justify; color: black'>" ;
+                    blogsHtml+=singleBlog.val().desc;
+                    blogsHtml+="</div> <br>";
+            blogsHtml+="</div> ";             
+
+            $('#blogs').html(blogsHtml);
+            });
+        }
+        });
+         //**********************RETRIEVE AND DISPLAY DATA FROM FIREBASE ENDS HERE**************
+ 
+       </script>
+              <!------VALIDATION AND POSTING OF BLOGS ENDS HERE-->
+       
+        </div>
+            </div>
+        </div>
+
+
+
+        
+ 
+        <script>
+            firebase.auth().onAuthStateChanged(function(user){
+                   if(user){
+                       var userId=firebase.auth().currentUser.uid;
+                       firebase.database().ref("Users/"+userId).once('value').then(function(snapshot){
+                           if(snapshot.val()){
+                               if(snapshot.val().payment!="paid"){
+                                   window.location.href="aePayment.html";
+                               }else{
+                             
+                           }
+                           }})}
+                           else{
+                            if(!user){
+                           console.log("tried to sign out");
+                              window.location.href="signin.html";   
+                          }
+              
+                   
+                           }
+                       });
+                     
+                
+            
+                   
+                   </script>
+   
+        
+              
+    </body>
+</html>
