@@ -1,0 +1,67 @@
+payable contract GeoHostel =
+
+  record hostel = {
+    name        : string,
+    image       : string,
+    location    : string,
+    facilities  : string,
+    price       : int,
+    status      : bool,
+    contact     : address }
+
+  record tran = {
+    id      : int,
+    name    : string,
+    contact : address,
+    reserver: address }
+
+  record state = {
+    hostels: map(string, hostel),
+    contactHostels: map(address, list(hostel)),
+    reserverHostels: map(address, list(tran)),
+    trans: map(int, tran) }
+
+  entrypoint init() = {
+    hostels = {},
+    contactHostels = {},
+    reserverHostels = {},
+    trans = {} }
+
+  entrypoint getHostels() =
+    state.hostels
+
+  entrypoint getTrans() =
+    state.trans
+
+  entrypoint contactHostels() =
+    Map.lookup_default(Call.caller, state.contactHostels, [])
+
+  entrypoint reserverHostels() =
+    Map.lookup_default(Call.caller, state.reserverHostels, [])
+
+  function checkHostel(hostelName : string) : bool =
+    switch(Map.lookup(hostelName, state.hostels))
+      None    => true
+      Some(x) => false
+
+  stateful entrypoint addHostel(name':string, image':string, location':string, facilities':string, price':int) =
+    require(checkHostel(name') == true, "Hostel Already Exist")
+    let newHostel ={name = name', image = image', location = location', facilities = facilities', price = price', status = false, contact = Call.caller}
+    
+    let newList = newHostel::contactHostels()
+    
+    put(state{hostels[name'] = newHostel, contactHostels[Call.caller] = newList})
+
+  payable stateful entrypoint reserveHostel(hostelName : string) =
+    require(checkHostel(hostelName) == false, "Hostel not found")
+    let hostel =state.hostels[hostelName]
+    require(hostel.status == false, "Hostel has been reserved")
+
+    Chain.spend(hostel.contact, Call.value)
+
+    let newTran = {id = Chain.timestamp, name = hostel.name, contact = hostel.contact, reserver = Call.caller}
+    let newTranList = newTran::reserverHostels()
+
+    let updatedStatus = state.hostels{ [hostelName].status = true }
+    
+    put(state{ hostels = updatedStatus, trans[Chain.timestamp] = newTran, reserverHostels[Call.caller] = newTranList })
