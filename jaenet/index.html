@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com">
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+    
+  <title>Jænet</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+<body>
+  
+  <div id="loader">
+    <div>
+      <img src="images/icons/preloader.gif" />
+      <p class="text-danger">Loading....</p>
+    </div>
+  </div>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-5 left-wrapper">
+        <div class="jaenet-banner">
+          <div class="logo">
+            <h1>Jænet</h1>
+          </div> 
+          <h2>
+            Janet Omotayo<br>Babajide
+            <span>Designer & Developer</span>
+          </h2>
+        </div>
+      </div>
+      <div class="col-sm-7 right-wrapper">
+        <div class="jaenet-wrapper">
+          <div class="jaenet-tab">
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#buyDesign" aria-controls="buyDesign" role="tab" data-toggle="tab">Buy Designs</a></li>
+              <li role="presentation"><a href="#aboutMe" aria-controls="aboutMe" role="tab" data-toggle="tab">About Me</a></li>
+              <li role="presentation" id="tran-tab"><a href="#myDesigns" aria-controls="myDesigns" role="tab" data-toggle="tab">My Designs</a></li>
+              <li role="presentation" id="admin-tab"><a href="#admin" aria-controls="admin" role="tab" data-toggle="tab">Admin</a></li>
+            </ul>
+          
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="buyDesign">
+                <div class="row">
+                  <div id="all-designs"></div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="aboutMe">
+                <div id="about-details" class="text-center"></div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="myDesigns">
+                <div id="my-trans">
+                  <div class="table-responsive">
+                    <table class="table table-condensed">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Category</th>
+                          <th>Quantity</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody id="my-tran-list"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="admin">
+                <p><a class="btn" data-toggle="modal" data-target="#profile-modal">Profile</a></p>
+                <p><a class="btn" data-toggle="modal" data-target="#design-modal">Add Design</a></p>
+                <div class="table-responsive">
+                  <table class="table table-condensed">
+                    <h3 class="text-center">Transaction List</h3>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Design</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody id="trans-list"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cart">
+            <div class="row">
+              <div class="col-xs-6">
+                <p>
+                  <span class="design-count">0</span> Designs 
+                  <span class="divider"></span> 
+                  Total: <span class="total-amount">0</span> æ
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <div class="text-right">
+                  <a class="btn disabled" data-toggle="modal" data-target="#design-details">PROCEED</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="modal right fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="Profile Modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <img src="images/icons/cancel.png">
+            </button>
+            <h4 class="modal-title">Jænet Profile</h4>
+          </div>
+          <div class="modal-body">
+            <div class="jaenetForm">	
+              <h3>About Me Details</h3>
+              <form>
+                <div class="form-group">
+                  <input type="text" id="name" class="form-control" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" id="email" class="form-control" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" id="contact" class="form-control" placeholder="Contact" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" id="stack" class="form-control" placeholder="Stack" required>
+                </div>
+                <div class="form-group">
+                  <textarea id="description" class="form-control" placeholder="Description" required></textarea>
+                </div>
+                <div class="form-group">
+                  <input type="file" id="jaenet-image" class="form-control" accept="image/*" required>
+                </div>
+                
+                <input type="submit" id="submit-profile" class="btn" value="Submit">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal right fade" id="design-modal" tabindex="-1" role="dialog" aria-labelledby="Design Modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <img src="images/icons/cancel.png">
+            </button>
+            <h4 class="modal-title">Add Design</h4>
+          </div>
+          <div class="modal-body">
+            <div class="jaenetForm">	
+              <h3>Design Details</h3>
+              <form id="design-form">
+                <div class="form-group">
+                  <input type="text" id="d-name" class="form-control" placeholder="Design Name" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" id="d-category" class="form-control" placeholder="Category" required>
+                </div>
+                <div class="form-group">
+                  <input type="number" id="d-price" class="form-control" placeholder="Price" required>
+                </div>
+                <div class="form-group">
+                  <input type="file" id="design-image" class="form-control" accept="image/*" required>
+                </div>
+                
+                <input type="submit" id="add-design" class="btn" value="Add Design">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal right fade" id="design-details" tabindex="-1" role="dialog" aria-labelledby="Design Modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <img src="images/icons/cancel.png">
+            </button>
+            <h4 class="modal-title">Cart</h4>
+          </div>
+          <div class="modal-body">
+            <div class="cart-information">
+              <div class="design-name"></div>
+              <div class="design-category"></div>
+              <ul>
+                <li>Designs: <span class="design-count"></span></li>
+                <li>Price: <span class="design-amount"></span></li>
+                <hr>
+                <li>Total: <span class="total-amount"></span></li>
+              </ul>
+            </div>
+            <div class="jaenetForm">
+              <h3>Contact Information</h3>
+              <form id="cart-form">
+                <div class="form-group">
+                  <input type="text" id="c-name" class="form-control" placeholder="Full Name" required>
+                </div>
+                <input type="submit" id="design-payment" class="btn" value="Proceed to Payment">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/@aeternity/aepp-sdk@6.1.2/dist/aepp-sdk.browser-script.js"></script>
+  <script src="js/ipfs-mini.js"></script>
+  <script src="js/index.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

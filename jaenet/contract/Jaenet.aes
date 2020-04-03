@@ -1,0 +1,80 @@
+payable contract Jaenet =
+
+  record jane = {
+    name        : string,
+    image       : string,
+    email       : string,
+    contact     : string,
+    stack       : string,
+    description : string }
+
+  record design = {
+    name     : string,
+    image    : string,
+    category : string,
+    price    : int }
+
+  record tran = {
+    name           : string,
+    designName     : string,
+    designCategory : string,
+    quantity       : int,
+    amount         : int }
+
+  record state = {
+    account : map(address, jane),
+    designs : map(string, design),
+    trans   : map(address, list(tran)),
+    janet   : address }
+
+  entrypoint init() = {
+    account = {},
+    designs = {},
+    trans   = {},
+    janet   = ak_2o5ZXFXU6uGNdLR2TzCBTSe7TCFfbtK8YAzMCd7zhosD9xymcq }
+
+  entrypoint getAbout() =
+    state.account[state.janet]
+
+  entrypoint getAccount() =
+    require(state.janet == Call.caller, "Not Authorized")
+    state.account[Call.caller]
+
+  entrypoint getDesigns() =
+    state.designs
+
+  entrypoint getTrans() =
+    require(state.janet == Call.caller, "Not Authorized")
+    state.trans
+
+  entrypoint myTrans() =
+    Map.lookup_default(Call.caller, state.trans, [])
+
+  stateful entrypoint profile(name':string, image':string, email':string, contact':string, stack':string, description':string) =
+    require(state.janet == Call.caller, "Not Authorized")
+    let profile ={name = name', image = image', email = email', contact = contact', stack = stack', description = description'}
+    
+    put(state{account[Call.caller] = profile})
+
+
+  function design(designName : string) : bool =
+    Map.member(designName, state.designs) 
+
+  stateful entrypoint addDesign(name':string, image':string, category':string, price':int) =
+    require(state.janet == Call.caller, "Not Authorized")
+    require(!design(name'), "Design Already Exist")
+
+    let newDesign ={name = name', image = image', category = category', price = price'}
+    
+    put(state{designs[name'] = newDesign})
+
+  payable stateful entrypoint buyDesign(name' : string, designName' : string, quantity' : int, amount' : int) =
+    require(design(designName'), "Design Not Found")
+    let design =state.designs[designName']
+
+    Chain.spend(state.janet, Call.value)
+
+    let newTran = {name = name', designName = design.name, designCategory = design.category, quantity = quantity', amount = amount'}
+    let newTranList = newTran::myTrans()
+    
+    put(state{ trans[Call.caller] = newTranList })
