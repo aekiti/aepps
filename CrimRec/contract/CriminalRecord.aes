@@ -1,0 +1,45 @@
+contract CriminalRecord =
+  record offense = 
+    { date: int,
+      name: string,
+      code: string,
+      penalty: string }
+
+  record criminal =
+    { name: string,  
+      dob: string,
+      pob: string,
+      offenses: list(offense),
+      code: string,
+      date : int }
+
+  record state = {criminals: map(string, criminal)}
+
+  stateful entrypoint init() = {criminals = {}}
+
+  entrypoint getCriminals() =
+    state.criminals
+
+  entrypoint getCriminalOffense(criminalCode : string) =
+    require(checkCriminal(criminalCode), "Criminal Not Found")
+    state.criminals[criminalCode].offenses
+
+  function checkCriminal(criminalCode : string) : bool =
+    Map.member(criminalCode, state.criminals) 
+
+  stateful entrypoint registerCriminal(name' : string, dob' : string, pob' : string, code' : string) =
+    require(!checkCriminal(code'), "Criminal Already Exist")
+    let newCriminal={name = name', dob = dob', pob = pob', offenses = [], code = code', date = Chain.timestamp}
+    
+    put(state{criminals[code'] = newCriminal})
+
+  stateful entrypoint registerOffense(criminalCode : string, name' : string, code' : string, penalty' : string) =
+    require(checkCriminal(criminalCode), "Criminal Not Found")
+    let newOffense = {date = Chain.timestamp, name = name', code = code', penalty = penalty'}
+
+    let criminal = state.criminals[criminalCode]
+    let offenseList = criminal.offenses
+    let newOffenseList = newOffense::offenseList
+    let updatedList = state.criminals{ [criminalCode].offenses = newOffenseList }
+    
+    put(state{criminals = updatedList})
