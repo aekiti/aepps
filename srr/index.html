@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Student Result Recorder æpp">
+
+  <title>Student Result Recorder æpp</title>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <nav class="navbar navbar-expand-md bg-color navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">Student Result Recorder æpp</a>
+  
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li id="student-nav" class="nav-item">
+          <a class="nav-link text-white" href="#student">Student</a>
+        </li>
+        <li id="cordinator-nav" class="nav-item">
+          <a class="nav-link text-white" href="#cordinator">Cordinator</a>
+        </li>
+        <li id="chancellor-nav" class="nav-item">
+          <a class="nav-link text-white" href="#chancellor">Chancellor</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="loader">
+    <div class="loader"></div>
+  </div>
+  <div class="container spacer">
+    <div id="message"></div>
+    <section id="student" class="my-5">
+      <h2 class="section-title">Student</h2>
+      <div id="student-profile"></div>
+      <div id="my-result" class="my-3">
+        <h4>My Results</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Course Code</th>
+                <th>Raw Score</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody id="result-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="cordinator" class="my-5">
+      <h2 class="section-title">Cordinator</h2>
+      <div id="cordinator-profile"></div>
+      <p id="no-student">Students Not Found</p>
+      <div id="result-form" class="my-3">
+        <h4>Add Grade</h4>
+        <form class="needs-validation" novalidate>
+          <div class="row">
+            <div class="form-group col">
+              <select class="custom-select" id="select-student" required>
+                <option value="none">-- Select One --</option>
+              </select>
+            </div>
+            <div class="form-group col">
+              <input type="text" class="form-control" id="course-code" placeholder="Course Code" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please enter course code.</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <input type="text" class="form-control" id="raw-score" placeholder="Raw Score" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please enter raw score.</div>
+            </div>
+            <div class="form-group col">
+              <input type="text" class="form-control" id="grade" placeholder="Grade" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please enter grade.</div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" id="add-result" class="btn bg-color">Record</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="chancellor" class="my-5">
+      <h2 class="section-title">Chancellor</h2>
+      <div id="student-count"></div>
+      <div id="cordinator-count"></div>
+      <p id="no-cordinator">Cordinators Not Found</p>
+      <div id="delete-form">
+        <h4>Delete Cordinator</h4>
+        <form>
+          <div class="form-group">
+            <select class="custom-select" id="select-cordinator" required>
+              <option value="none">-- Select One --</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <button type="submit" id="delete-cordinator" class="btn bg-color">Delete</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/@aeternity/aepp-sdk@6.1.2/dist/aepp-sdk.browser-script.js"></script>
+  <script src="js/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+contract StudentResult =
+  record result = 
+    { coursecode:string,
+      rawscore:string,
+      grade:string }
+
+  record student =
+    { name:string,
+      matric:hash,
+      results: list(result) }
+    
+  record state = {
+    students:map(address, student),
+    cordinators:map(address, string),
+    chancellor:address }
+
+  entrypoint init() = {
+    students = {},
+    cordinators = {},
+    chancellor = ak_4uxrV4KWa9DSbcxJ4HLJV9RdhQfZNAxoyj7Jf4syara942ZxB }
+
+  function reqistrationCheck(exp : bool, err : string) =
+    if(!exp)
+     abort(err)
+
+  function studentCheck() =
+    let student = Map.member(Call.caller, state.students)
+    require(student, "Not Authorized: Student Only")
+
+  function cordinatorCheck() =
+    let cordinator = Map.member(Call.caller, state.cordinators)
+    require(cordinator, "Not Authorized: Cordinator Only")
+
+  entrypoint chancellorCheck() =
+    require(state.chancellor == Call.caller, "Not Authorized: Chancellor Only")
+
+  stateful entrypoint addStudent(name':string, matric':string) =
+    reqistrationCheck(!(Map.member(Call.caller, state.cordinators)), "Already a Cordinator")
+
+    let matricHash = String.sha3(matric')
+    let newStudent = {name=name', matric=matricHash, results=[]}
+
+    put(state{students[Call.caller] = newStudent})
+
+  stateful entrypoint addCordinator(name':string) =
+    reqistrationCheck(!(Map.member(Call.caller, state.students)), "Already a Student")
+
+    put(state{cordinators[Call.caller] = name'})
+  
+  stateful entrypoint addResult(student:address, coursecode':string, rawscore':string, grade':string) =
+    cordinatorCheck()
+    let newResult = {coursecode=coursecode', rawscore=rawscore', grade=grade'}
+    
+    let result = state.students[student].results
+    let newResultList = newResult::result
+    let updateResult = state.students{ [student].results = newResultList }
+    
+    put(state{students = updateResult})
+    
+  entrypoint student()=
+    require(Map.member(Call.caller, state.students), "Student Not Found")
+    studentCheck()
+    state.students[Call.caller]
+
+  entrypoint studentResult()=
+    require(Map.member(Call.caller, state.students), "Student Not Found")
+    studentCheck()
+    state.students[Call.caller].results
+
+  entrypoint cordinator()=
+    require(Map.member(Call.caller, state.cordinators), "Cordinator Not Found")
+    cordinatorCheck()
+    state.cordinators[Call.caller]
+    
+  entrypoint getStudents()=
+    state.students
+
+  entrypoint getCordinators()=
+    chancellorCheck()
+    state.cordinators
+
+  stateful entrypoint deleteCordinator(cordinatorAddress : address)=
+    chancellorCheck()
+    let updatedCordinators = Map.delete(cordinatorAddress, state.cordinators)
+
+    put(state{cordinators = updatedCordinators})
