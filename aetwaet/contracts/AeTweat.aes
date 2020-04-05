@@ -1,0 +1,53 @@
+payable contract AeTwaet =
+
+  record twaet={
+    writerAddress: address,
+    name: string,
+    avatar: string,
+    twaetBody: string,
+    totalTips: int,
+    tipsCount: int}
+
+  record state = {
+    twaets: map(string, twaet)}
+
+  stateful entrypoint init(): state = {twaets={}}
+
+  // get a twaet
+  entrypoint getTwaet(id' : string) = 
+    switch(Map.lookup(id', state.twaets))
+      None => abort("There is no twaet with this id")
+      Some(x) => x
+      
+  // get all twaets
+  entrypoint getAllTwaets() =
+    state.twaets
+
+
+  // add a twaet
+  stateful entrypoint addTwaet(id' :string, name' : string, avatar' : string, twaet' : string) =
+
+    let newTwaet = {
+      writerAddress = Call.caller,
+      name = name',
+      avatar = avatar',
+      twaetBody = twaet',
+      totalTips = 0,
+      tipsCount = 0}
+
+    put(state{twaets[id'] = newTwaet})
+
+  // Tip a twaet
+  payable stateful entrypoint tipTwaet(id': string) =
+    let twaet = getTwaet(id')
+    Chain.spend(twaet.writerAddress, Call.value)
+    let newTotalTips = twaet.totalTips + Call.value
+    let newTipsCount = twaet.tipsCount + 1
+    let updatedTwaet ={
+      writerAddress = twaet.writerAddress,
+      name = twaet.name,
+      avatar = twaet.avatar,
+      twaetBody = twaet.twaetBody,
+      totalTips = newTotalTips,
+      tipsCount = newTipsCount}
+    put(state{twaets[id'] = updatedTwaet})
