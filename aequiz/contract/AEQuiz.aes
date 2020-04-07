@@ -17,7 +17,7 @@ contract AEQuiz =
   entrypoint init() = 
     { questions = {},
       scores = {},
-      admin = ak_2aM22jLrxw8Kjmbpbc7pFukMfPj3uEuDqqu6iUE1um9MJWejNH }
+      admin = ak_22y96g8SUGgmDRVvaWdNsq4hW82pKXWptoxSQroNR3AWZdtZvT }
 
   function checkQuestion(question: string) : bool =
     Map.member(question, state.questions)

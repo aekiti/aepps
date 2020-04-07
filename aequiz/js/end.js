@@ -5,7 +5,7 @@ let finalScore = document.getElementById("finalScore");
 let mostRecentScore = localStorage.getItem("mostRecentScore");
 let client = null, contractInstance = null;
 
-let contractAddress="ct_2qkMkeUXGjCZE3g4JKZa7u1wFe2e79cpSJjy1aDMruKEZWAPqf";
+let contractAddress="ct_zWHcgTtbyWNNW8hMxRAmnzcPF94NeuZfvvS77vVMJU44CMNwP";
 let contractSource=`
 contract AEQuiz =
 
@@ -26,7 +26,7 @@ contract AEQuiz =
   entrypoint init() = 
     { questions = {},
       scores = {},
-      admin = ak_2aM22jLrxw8Kjmbpbc7pFukMfPj3uEuDqqu6iUE1um9MJWejNH }
+      admin = ak_22y96g8SUGgmDRVvaWdNsq4hW82pKXWptoxSQroNR3AWZdtZvT }
 
   function checkQuestion(question: string) : bool =
     Map.member(question, state.questions)
