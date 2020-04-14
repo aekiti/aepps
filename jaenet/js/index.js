@@ -386,7 +386,7 @@ window.addEventListener('load', async function() {
   .then(async function() {
     let allTrans = (await contractInstance.methods.getTrans()).decodedResult;
     allTrans.map(tran => {
-      transDom(tran[1].name, tran[1].designName, tran[1].designCategory, tran[1].quantity , tran[1].amount)
+      transDom(tran[1][0].name, tran[1][0].designName, tran[1][0].designCategory, tran[1][0].quantity , tran[1][0].amount)
     });
   })
   .catch(function(err) {
