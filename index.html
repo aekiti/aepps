@@ -69,6 +69,19 @@
   <link rel="stylesheet" type="text/css" href="https://aekiti.com/assets/css/plugins/pace-theme.css">
   <link rel="stylesheet" href="https://aekiti.com/assets/css/styles.css">
   <link rel="stylesheet" href="https://aekiti.com/assets/css/responsive.css">
+
+  <style>
+    a:hover {
+      text-decoration: none;
+    }
+    .desktop {display: block}
+    .mobile {display: none}
+
+    @media screen and (max-width: 768px) {
+    .desktop {display: none}
+    .mobile {display: block}
+    }
+  </style>
 </head>
 <body class="x-hidden has-sticky-header">
   <nav class="navbar navbar-expand-lg fixed-top custom-menu custom-menu__light">
@@ -111,10 +124,10 @@
           <p>
             Want to learn more? Check out the links below.
             <ul>
-              <li><a href="https://www.youtube.com/playlist?list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank" rel="noopener noreferrer">æpp explanation</a></li>
-              <li><a href="https://aekiti.github.io/devstudyjaem-ekiti" target="_blank" rel="noopener noreferrer">devstudyjæm</a></li>
-              <li><a href="https://aeternity.com/documentation-hub" target="_blank" rel="noopener noreferrer">æternity docs</a></li>
-              <li><a href="https://dacade.org" target="_blank" rel="noopener noreferrer">dacade</a></li>
+              <li><a href="https://www.youtube.com/playlist?list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> ækiti æpps</a></li>
+              <li><a href="https://aekiti.github.io/devstudyjaem-ekiti" target="_blank" rel="noopener noreferrer"><i class="fa fa-link"></i> devstudyjæm</a></li>
+              <li><a href="https://aeternity.com/documentation-hub" target="_blank" rel="noopener noreferrer"><i class="fa fa-link"></i> æternity docs</a></li>
+              <li><a href="https://dacade.org" target="_blank" rel="noopener noreferrer"><i class="fa fa-link"></i> dacade</a></li>
             </ul>
           </p>
         </div>
@@ -122,46 +135,51 @@
       <div id="projects" class="my-4">
         <div class="text-center">
           <h3 class="section-title">Projects</h3>
-          <p>Note the <b>See Me</b> link open the æpp on base æpp on mobile view</p>
+          <p class="mobile">Note the <b>See æpp</b> link open the æpp on base æpp</p>
+          <p class="desktop">Note the <b>See æpp</b> link open the æpp on a new tab and need base æpp</p>
         </div>
         <div class="card-columns mt-4">
           <div class="card border-primary">
             <div class="card-body">
-              <h4 class="card-title"><a data-toggle="modal" data-target="#aetweet-modal">AeTweet</a></h4>
+              <h4 class="card-title"><a href="#" data-toggle="modal" data-target="#aetweet-modal">AeTweet</a></h4>
               <p class="card-text">A streamlined version of Twitter where users can twæt and receive tips.</p>
               <div class="my-2">
-                <!-- <a href="" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br> -->
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/aetwaet/" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://www.youtube.com/watch?v=3Jf6UiTEF5Y&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/aetwaet/" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/aetwaet/" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
           <div class="card border-primary">
             <div class="card-body">
-              <h4 class="card-title"><a data-toggle="modal" data-target="#rideart-modal">RideArt</a></h4>
+              <h4 class="card-title"><a href="#" data-toggle="modal" data-target="#rideart-modal">RideArt</a></h4>
               <p class="card-text">RideArt is an aepp that helps users get to their destination with ease.</p>
               <div class="my-2">
                 <a href="https://www.youtube.com/watch?v=2D-UHp2v58I&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/rideart" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/rideart" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/rideart" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
           <div class="card border-primary">
             <div class="card-body">
-              <h4 class="card-title"><a data-toggle="modal" data-target="#stherfix-modal">Stherfix</a></h4>
+              <h4 class="card-title"><a href="#" data-toggle="modal" data-target="#stherfix-modal">Stherfix</a></h4>
               <p class="card-text">StherFix helps to create personalized booking experiences for Dental Check up.</p>
               <div class="my-2">
                 <a href="https://www.youtube.com/watch?v=STkpfk1qmxQ&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/stherfix" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/stherfix" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/stherfix" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
           <div class="card border-primary">
             <div class="card-body">
-              <h4 class="card-title"><a data-toggle="modal" data-target="#geohostel-modal">GeoHostel</a></h4>
+              <h4 class="card-title"><a href="#" data-toggle="modal" data-target="#geohostel-modal">GeoHostel</a></h4>
               <p class="card-text">An æpp that solves the problem of getting hotels on campus.</p>
               <div class="my-2">
                 <a href="https://www.youtube.com/watch?v=Ycy3Lsi78Ro&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/geohostel" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/geohostel" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/geohostel" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
@@ -170,8 +188,9 @@
               <h4 class="card-title">AePhotos</h4>
               <p class="card-text">Aephotos is a decentralized way for people to store images on the internet.</p>
               <div class="my-2">
-                <!-- <a href="" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br> -->
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/AePhotos" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://www.youtube.com/watch?v=yR7ugovNE-w&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/AePhotos" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/AePhotos" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
@@ -181,7 +200,8 @@
               <p class="card-text">Hospital Management System that keeps track of patient medical records.</p>
               <div class="my-2">
                 <a href="https://www.youtube.com/watch?v=cPi5g9CEUFM&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/hms" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/hms" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/hms" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
@@ -190,8 +210,9 @@
               <h4 class="card-title">Jænet</h4>
               <p class="card-text">A portfolio site that showcase paper work designs up for sells.</p>
               <div class="my-2">
-                <!-- <a href="" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br> -->
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/jaenet" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://www.youtube.com/watch?v=ivpbnsVtmIc&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/jaenet" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/jaenet" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
@@ -201,7 +222,8 @@
               <p class="card-text">An effective system that register and stores information about criminals.</p>
               <div class="my-2">
                 <a href="https://www.youtube.com/watch?v=99DlMKG2zV8&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/CrimRec" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/CrimRec" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/CrimRec" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
@@ -211,7 +233,8 @@
               <p class="card-text">Student Result Recorder helps students to track thier immutable grades.</p>
               <div class="my-2">
                 <a href="https://www.youtube.com/watch?v=ywqWNaoTzPo&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/srr" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/srr" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/srr" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
@@ -221,27 +244,31 @@
               <p class="card-text">AEQuiz is a web æpp that engages the audience in a unique and fun way.</p>
               <div class="my-2">
                 <a href="https://www.youtube.com/watch?v=pfp6MaWdN9E&list=PLVz98HTQCJzTKkOWbmmhw79L5Bf6QrHrJ" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br>
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/aequiz" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/aequiz" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/aequiz" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
           <div class="card border-primary">
             <div class="card-body">
-              <h4 class="card-title"><a data-toggle="modal" data-target="#nimiblog-modal">Nimi Blog</a></h4>
+              <h4 class="card-title"><a href="#" data-toggle="modal" data-target="#nimiblog-modal">Nimi Blog</a></h4>
               <p class="card-text">A blog æpp with firebase authentication system and nodejs technology.</p>
               <div class="my-2">
                 <!-- <a href="" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br> -->
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/Nimi-Blog" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/Nimi-Blog" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/Nimi-Blog" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/Nimi-Blog" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
           <div class="card border-primary">
             <div class="card-body">
-              <h4 class="card-title"><a data-toggle="modal" data-target="#aeksu-modal">AE EKSU</a></h4>
+              <h4 class="card-title"><a href="#" data-toggle="modal" data-target="#aeksu-modal">AE EKSU</a></h4>
               <p class="card-text">A payment system maing changes to EKSU methods of payment.</p>
               <div class="my-2">
                 <!-- <a href="" target="_blank"><i class="fab fa-youtube mr-2"></i> Learn More</a><br> -->
-                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/aeksu" target="_blank" class="mt-1"><i class="fa fa-link mr-2"></i> See Me</a>
+                <a href="https://base.aepps.com/browser/aekiti.github.io/aepps/aeksu" target="_blank" class="mobile mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
+                <a href="https://aekiti.github.io/aepps/aeksu" target="_blank" class="desktop mt-1"><i class="fa fa-link mr-2"></i> See æpp</a>
               </div>
             </div>
           </div>
@@ -304,7 +331,7 @@
               <div class="footer-widget">
                 <h4 class="footer-widget__title">Contribute</h4>
                 <ul class="list-unstyled">
-                  <li class="d-sm-none">
+                  <li class="mobile">
                     <a href="https://base.aepps.com/transfer/send/aeternityekiti.chain" target="_blank" rel="follow">aeternityekiti.chain</a>
                   </li>
                   <li>
